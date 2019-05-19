@@ -8,7 +8,16 @@
         android:id="@+id/boton1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Eviar"
+        android:text="Profesores"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_margin="12dp"/>
+
+    <Button
+        android:id="@+id/boton2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Estudiantes"
         android:layout_marginStart="50dp"
         android:layout_marginLeft="10dp"
         android:layout_margin="12dp"/>

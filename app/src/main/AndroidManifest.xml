@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ActivityEstudiantes"
+            android:label="@string/title_activity_estudiantes"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.proyectomovil.MainActivity" />
+        </activity>
+        <activity
             android:name=".ActivityProfesor"
             android:label="@string/title_activity_profesor"
             android:parentActivityName=".MainActivity"
