@@ -83,16 +83,16 @@ public class MainActivity3 extends AppCompatActivity
 
         FragmentManager fragmentManager = getSupportFragmentManager();
 
-        if (id == R.id.nav_descripcionEst) {
-            //fragmentManager.beginTransaction().replace(R.id.contenedor,new descripcionEstudiantes()).commit();
-        } else if (id == R.id.nav_docentes) {
-            //fragmentManager.beginTransaction().replace(R.id.contenedor,new docentes()).commit();
-        } else if (id == R.id.nav_novedadesEst) {
-            //fragmentManager.beginTransaction().replace(R.id.contenedor,new novedadesEstudiantes()).commit();
-        } else if (id == R.id.nav_salidasDeCampoEst) {
-            //fragmentManager.beginTransaction().replace(R.id.contenedor,new salidasCampoEstudiantes()).commit();
-        } else if (id == R.id.nav_eventosEst) {
-            //fragmentManager.beginTransaction().replace(R.id.contenedor,new eventoExterno()).commit();
+        if (id == R.id.nav_descripcionDoc) {
+            fragmentManager.beginTransaction().replace(R.id.contenedor,new descripcionDocente()).commit();
+        } else if (id == R.id.nav_estudiantes) {
+            fragmentManager.beginTransaction().replace(R.id.contenedor,new estudiantes()).commit();
+        } else if (id == R.id.nav_salidasDeCampoDoc) {
+            fragmentManager.beginTransaction().replace(R.id.contenedor,new salidasCampoDocentes()).commit();
+        } else if (id == R.id.nav_novedadesDoc) {
+            fragmentManager.beginTransaction().replace(R.id.contenedor,new novedadesDocentes()).commit();
+        } else if (id == R.id.nav_novedadesGen) {
+            fragmentManager.beginTransaction().replace(R.id.contenedor,new novedadesGenerales()).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

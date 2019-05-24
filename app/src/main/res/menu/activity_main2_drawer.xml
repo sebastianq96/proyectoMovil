@@ -5,23 +5,23 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_descripcionEst"
             android:icon="@drawable/ic_menu_camera"
             android:title="Descripción" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_docentes"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Docentes" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_novedadesEst"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Novedades" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_salidasDeCampoEst"
             android:icon="@drawable/ic_menu_manage"
             android:title="Salidas de Campo" />
         <item
-            android:id="@+id/nav_manager"
+            android:id="@+id/nav_eventosEst"
             android:icon="@drawable/ic_menu_manage"
             android:title="Lugar de eventos" />
     </group>
