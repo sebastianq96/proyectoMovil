@@ -27,13 +27,13 @@ public class perfilActivity extends AppCompatActivity {
 //            }
 //        });
 //
-//        buttonDocente.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent2 = new Intent(perfilActivity.this, MainActivity2.class);
-//                startActivity(intent2);
-//            }
-//        });
+        buttonDocente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent(perfilActivity.this, MainActivity3.class);
+                startActivity(intent2);
+            }
+        });
 
         buttonEstudiante.setOnClickListener(new View.OnClickListener() {
             @Override

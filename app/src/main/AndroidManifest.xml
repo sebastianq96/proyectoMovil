@@ -33,7 +33,16 @@
             android:name=".MainActivity2"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme" />
-        <activity android:name=".perfilActivity"></activity>
+        <activity android:name=".perfilActivity" />
+        <activity
+            android:name=".MainActivity3"
+            android:label="Perfil Docentes"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.proyectomovil.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

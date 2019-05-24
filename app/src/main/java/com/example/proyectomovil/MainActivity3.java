@@ -3,7 +3,6 @@ package com.example.proyectomovil;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -15,13 +14,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity2 extends AppCompatActivity
+public class MainActivity3 extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_main3);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -57,7 +56,7 @@ public class MainActivity2 extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_activity2, menu);
+        getMenuInflater().inflate(R.menu.main_activity3, menu);
         return true;
     }
 
@@ -79,22 +78,21 @@ public class MainActivity2 extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         if (id == R.id.nav_descripcionEst) {
-            fragmentManager.beginTransaction().replace(R.id.contenedor,new descripcionEstudiantes()).commit();
+            //fragmentManager.beginTransaction().replace(R.id.contenedor,new descripcionEstudiantes()).commit();
         } else if (id == R.id.nav_docentes) {
-            fragmentManager.beginTransaction().replace(R.id.contenedor,new docentes()).commit();
+            //fragmentManager.beginTransaction().replace(R.id.contenedor,new docentes()).commit();
         } else if (id == R.id.nav_novedadesEst) {
-            fragmentManager.beginTransaction().replace(R.id.contenedor,new novedadesEstudiantes()).commit();
+            //fragmentManager.beginTransaction().replace(R.id.contenedor,new novedadesEstudiantes()).commit();
         } else if (id == R.id.nav_salidasDeCampoEst) {
-            fragmentManager.beginTransaction().replace(R.id.contenedor,new salidasCampoEstudiantes()).commit();
+            //fragmentManager.beginTransaction().replace(R.id.contenedor,new salidasCampoEstudiantes()).commit();
         } else if (id == R.id.nav_eventosEst) {
-            fragmentManager.beginTransaction().replace(R.id.contenedor,new eventoExterno()).commit();
+            //fragmentManager.beginTransaction().replace(R.id.contenedor,new eventoExterno()).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
