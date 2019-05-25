@@ -8,14 +8,13 @@ import android.widget.Button;
 
 public class perfilActivity extends AppCompatActivity {
 
-    private Button buttonAdministrador, buttonDocente, buttonEstudiante;
+    private Button buttonDocente, buttonEstudiante;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
-        buttonAdministrador = (Button)findViewById(R.id.buttonAdministrador);
         buttonDocente = (Button)findViewById(R.id.buttonDocente);
         buttonEstudiante = (Button)findViewById(R.id.buttonEstudiante);
 

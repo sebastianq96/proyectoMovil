@@ -32,14 +32,6 @@
                     android:textColor="@android:color/white"/>
 
                 <Button
-                    android:id="@+id/buttonAdministrador"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Administrador"
-                    android:theme="@style/RaisedButtonDark"
-                    android:layout_marginTop="@dimen/button_margin_createaccount"/>
-
-                <Button
                     android:id="@+id/buttonDocente"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
