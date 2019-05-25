@@ -5,15 +5,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button bEntrar;
+    private EditText usuario;
+    private EditText contrasena;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        usuario = (EditText)findViewById(R.id.usuario);
+        contrasena = (EditText)findViewById(R.id.contrasena);
         bEntrar = (Button)findViewById(R.id.entrar);
 
         //FUNCIÓN, LUEGO DEL LOGGIN QUE ENVIARÁ

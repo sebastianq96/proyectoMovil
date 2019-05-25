@@ -7,11 +7,11 @@
         <item
             android:id="@+id/nav_descripcionDoc"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Descripción" />
+            android:title="Descripción del curso" />
         <item
             android:id="@+id/nav_estudiantes"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Estudiantes" />
+            android:icon="@drawable/student"
+            android:title="Estudiantes del curso" />
         <item
             android:id="@+id/nav_salidasDeCampoDoc"
             android:icon="@drawable/ic_menu_slideshow"

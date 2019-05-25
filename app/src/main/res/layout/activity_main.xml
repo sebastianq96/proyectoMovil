@@ -45,7 +45,7 @@
                     android:theme="@style/EditTextWhite">
 
                     <android.support.design.widget.TextInputEditText
-                        android:id="@+id/username"
+                        android:id="@+id/usuario"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/hint_username" />
@@ -58,7 +58,7 @@
                     android:theme="@style/EditTextWhite">
 
                     <android.support.design.widget.TextInputEditText
-                        android:id="@+id/password"
+                        android:id="@+id/contrasena"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/hint_password"
