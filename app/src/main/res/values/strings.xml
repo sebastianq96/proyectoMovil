@@ -26,4 +26,6 @@
     <string name="title_activity_main3">MainActivity3</string>
 
     <string name="iniciar_recorrido">Iniciar Recorrido</string>
+    <string name="access_token">sk.eyJ1IjoiamhvcmRhbnJlcyIsImEiOiJjanZldjJrY2wwdHh3NGVwYzYxOWJla3lwIn0.rub9XpppmynsJic8OqVe2A</string>
+
 </resources>
