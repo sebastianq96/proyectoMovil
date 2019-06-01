@@ -1,5 +1,9 @@
 package com.example.proyectomovil;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,7 +20,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+@SuppressLint("InlinedApi")
 public class MainActivity2 extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -25,6 +41,7 @@ public class MainActivity2 extends AppCompatActivity
     private TextView tx1;
     private TextView tx2;
     private TextView tx3;
+    private TextView tx4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +67,10 @@ public class MainActivity2 extends AppCompatActivity
         tx1=(TextView)findViewById(R.id.textView2);
         tx2=(TextView)findViewById(R.id.textView3);
         tx3=(TextView)findViewById(R.id.textView4);
+        tx4=(TextView)findViewById(R.id.textView5);
+
+        new Consultar(this).execute();
+
     }
 
     @Override
@@ -71,9 +92,7 @@ public class MainActivity2 extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -99,6 +118,7 @@ public class MainActivity2 extends AppCompatActivity
             tx1.setVisibility(View.INVISIBLE);
             tx2.setVisibility(View.INVISIBLE);
             tx3.setVisibility(View.INVISIBLE);
+            tx4.setVisibility(View.INVISIBLE);
 
         } else if (id == R.id.nav_docentes) {
             fragmentManager.beginTransaction().replace(R.id.contenedor,new docentes()).commit();
@@ -106,6 +126,7 @@ public class MainActivity2 extends AppCompatActivity
             tx1.setVisibility(View.INVISIBLE);
             tx2.setVisibility(View.INVISIBLE);
             tx3.setVisibility(View.INVISIBLE);
+            tx4.setVisibility(View.INVISIBLE);
 
         } else if (id == R.id.nav_novedadesEst) {
             fragmentManager.beginTransaction().replace(R.id.contenedor,new novedadesEstudiantes()).commit();
@@ -113,13 +134,16 @@ public class MainActivity2 extends AppCompatActivity
             tx1.setVisibility(View.INVISIBLE);
             tx2.setVisibility(View.INVISIBLE);
             tx3.setVisibility(View.INVISIBLE);
+            tx4.setVisibility(View.INVISIBLE);
 
         } else if (id == R.id.nav_salidasDeCampoEst) {
-            fragmentManager.beginTransaction().replace(R.id.contenedor,new salidasCampoEstudiantes()).commit();
+            Intent intent3 = new Intent(MainActivity2.this, MainActivity4.class);
+            startActivity(intent3);
             img.setVisibility(View.INVISIBLE);
             tx1.setVisibility(View.INVISIBLE);
             tx2.setVisibility(View.INVISIBLE);
             tx3.setVisibility(View.INVISIBLE);
+            tx4.setVisibility(View.INVISIBLE);
 
         } else if (id == R.id.nav_eventosEst) {
             fragmentManager.beginTransaction().replace(R.id.contenedor,new eventoExterno()).commit();
@@ -127,10 +151,68 @@ public class MainActivity2 extends AppCompatActivity
             tx1.setVisibility(View.INVISIBLE);
             tx2.setVisibility(View.INVISIBLE);
             tx3.setVisibility(View.INVISIBLE);
+            tx4.setVisibility(View.INVISIBLE);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    //-------------------AsyncTask para consultar cursos---------------------------------------------------------------------------------------------
+    class Consultar extends AsyncTask<String, String, String> {
+        private Activity context;
+
+        Consultar(Activity context) {
+            this.context = context;
+        }
+
+        protected String doInBackground(String... params) {
+            try {
+                final rol estudiante = consultar();
+                if (estudiante != null)
+                    context.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            tx1.setText(estudiante.getNombre());
+                            tx2.setText("Programa: "+estudiante.getPrograma());
+                            tx3.setText("Cedula: "+estudiante.getCedula());
+                            tx4.setText("Usuario: "+ estudiante.getUsuario());
+                        }
+                    });
+                else
+                    context.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context, "clase no encontrado", Toast.LENGTH_LONG).show();
+                        }
+                    });
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+    private rol consultar() throws JSONException {
+
+        String url = Constants.URL + "getEstudiante.php";
+
+        List<NameValuePair> nameValuePairs;
+        nameValuePairs = new ArrayList<NameValuePair>(1);
+        nameValuePairs.add(new BasicNameValuePair("rol", "estudiante"));
+
+        String json = APIHandler.POSTRESPONSE(url, nameValuePairs);
+        if (json != null) {
+            JSONObject object = new JSONObject(json);
+            JSONArray json_array = object.optJSONArray("estudiante");
+            if (json_array.length() > 0) {
+                rol profesor = new rol(json_array.getJSONObject(0));
+                return profesor;
+            }
+            return null;
+        }
+        return null;
     }
 }
