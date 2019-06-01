@@ -15,7 +15,7 @@ public class Cursos {
     private String fechaFin;
     private String horario;
     private String descripcion;
-    private int id_novedades;
+
 
 
     public Cursos(JSONObject objetoJSON) throws JSONException {
@@ -25,7 +25,7 @@ public class Cursos {
         this.fechaFin = objetoJSON.getString("fechaFin");
         this.horario = objetoJSON.getString("horario");
         this.descripcion = objetoJSON.getString("descripcion");
-        this.id_novedades = objetoJSON.getInt("id_novedades");
+
     }
 
     public int getid_curso() {
@@ -53,9 +53,6 @@ public class Cursos {
 
     public String getDescripcion(){return descripcion;}
     public void setDescripcion(String descripcion){this.descripcion= descripcion;}
-
-    public int getId_novedades(){return id_novedades;}
-    public void setId_novedades(int id_novedades){this.id_novedades= id_novedades;}
 
 
 

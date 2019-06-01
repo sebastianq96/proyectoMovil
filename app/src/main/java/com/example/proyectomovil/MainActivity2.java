@@ -14,9 +14,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class MainActivity2 extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+
+    private ImageView img;
+    private TextView tx1;
+    private TextView tx2;
+    private TextView tx3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +33,7 @@ public class MainActivity2 extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -43,6 +44,12 @@ public class MainActivity2 extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
+
+
+        img=(ImageView)findViewById(R.id.imageView5);
+        tx1=(TextView)findViewById(R.id.textView2);
+        tx2=(TextView)findViewById(R.id.textView3);
+        tx3=(TextView)findViewById(R.id.textView4);
     }
 
     @Override
@@ -88,14 +95,38 @@ public class MainActivity2 extends AppCompatActivity
 
         if (id == R.id.nav_descripcionEst) {
             fragmentManager.beginTransaction().replace(R.id.contenedor,new descripcionEstudiantes()).commit();
+            img.setVisibility(View.INVISIBLE);
+            tx1.setVisibility(View.INVISIBLE);
+            tx2.setVisibility(View.INVISIBLE);
+            tx3.setVisibility(View.INVISIBLE);
+
         } else if (id == R.id.nav_docentes) {
             fragmentManager.beginTransaction().replace(R.id.contenedor,new docentes()).commit();
+            img.setVisibility(View.INVISIBLE);
+            tx1.setVisibility(View.INVISIBLE);
+            tx2.setVisibility(View.INVISIBLE);
+            tx3.setVisibility(View.INVISIBLE);
+
         } else if (id == R.id.nav_novedadesEst) {
             fragmentManager.beginTransaction().replace(R.id.contenedor,new novedadesEstudiantes()).commit();
+            img.setVisibility(View.INVISIBLE);
+            tx1.setVisibility(View.INVISIBLE);
+            tx2.setVisibility(View.INVISIBLE);
+            tx3.setVisibility(View.INVISIBLE);
+
         } else if (id == R.id.nav_salidasDeCampoEst) {
             fragmentManager.beginTransaction().replace(R.id.contenedor,new salidasCampoEstudiantes()).commit();
+            img.setVisibility(View.INVISIBLE);
+            tx1.setVisibility(View.INVISIBLE);
+            tx2.setVisibility(View.INVISIBLE);
+            tx3.setVisibility(View.INVISIBLE);
+
         } else if (id == R.id.nav_eventosEst) {
             fragmentManager.beginTransaction().replace(R.id.contenedor,new eventoExterno()).commit();
+            img.setVisibility(View.INVISIBLE);
+            tx1.setVisibility(View.INVISIBLE);
+            tx2.setVisibility(View.INVISIBLE);
+            tx3.setVisibility(View.INVISIBLE);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

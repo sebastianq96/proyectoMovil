@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ public class descripcionEstudiantes extends Fragment {
 
     private TextView text;
     private TextView text2;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

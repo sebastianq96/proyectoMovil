@@ -25,7 +25,7 @@ import java.util.List;
 
 @SuppressLint("InlinedApi")
 public class docentes extends Fragment {
-    
+
         private TextView text;
         private TextView text2;
         private TextView text3;
