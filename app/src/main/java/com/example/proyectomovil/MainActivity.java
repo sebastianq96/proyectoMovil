@@ -86,7 +86,8 @@ public class MainActivity extends AppCompatActivity {
                                 user=usuario.getUsuario();
                                 pass=usuario.getContrasena();
                                 rol=usuario.getRol();
-                                Log.d("hola",user);
+
+                                if(user.equals("")){}
 
                         }
                     });
@@ -119,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         String json = APIHandler.POSTRESPONSE(url, nameValuePairs);
         if (json != null) {
             JSONObject object = new JSONObject(json);
-            JSONArray json_array = object.optJSONArray("login");
+            JSONArray json_array = object.optJSONArray("usuario");
             if (json_array.length() > 0) {
                 rol usuario = new rol(json_array.getJSONObject(0));
                 return usuario;

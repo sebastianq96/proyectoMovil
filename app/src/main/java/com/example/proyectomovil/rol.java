@@ -6,6 +6,7 @@ import org.json.JSONObject;
 public class rol {
 
     private int id_rol;
+    private int id_curso;
     private String cedula;
     private String nombre;
     private String programa;
@@ -15,6 +16,7 @@ public class rol {
 
     public rol(JSONObject objetoJSON) throws JSONException {
         this.id_rol = objetoJSON.getInt("id_rol");
+        this.id_curso = objetoJSON.getInt("id_curso");
         this.cedula = objetoJSON.getString("cedula");
         this.nombre = objetoJSON.getString("nombre");
         this.programa = objetoJSON.getString("programa");
@@ -29,6 +31,14 @@ public class rol {
     public void setId_rol(int id_rol) {
         this.id_rol = id_rol;
     }
+
+    public int getId_curso() {
+        return id_curso;
+    }
+    public void setId_curso(int id_curso) {
+        this.id_curso = id_curso;
+    }
+
 
     public String getCedula() { return cedula; }
     public void setCedula(String cedula) { this.cedula = cedula; }
