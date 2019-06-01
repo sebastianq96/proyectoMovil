@@ -3,7 +3,6 @@ package com.example.proyectomovil;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AppComponentFactory;
 import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
