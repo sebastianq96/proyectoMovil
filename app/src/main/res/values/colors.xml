@@ -6,4 +6,8 @@
     <color name="colorButton">#b71c1c</color>
     <color name="editTextColorWhite">#FFFFFF</color>
     <color name="editTextColorBlack">#000000</color>
+
+    <color name="mapboxWhite">#ffffff</color>
+    <color name="mapboxblue">#4264fb</color>
+    <color name="mapboxGrayLight">#C6D2E1</color>
 </resources>
