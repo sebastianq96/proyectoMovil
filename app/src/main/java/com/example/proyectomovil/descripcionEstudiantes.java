@@ -33,6 +33,7 @@ public class descripcionEstudiantes extends Fragment {
 
     private TextView text;
     private TextView text2;
+    String user;
 
 
     @Override
@@ -84,10 +85,11 @@ public class descripcionEstudiantes extends Fragment {
     private Cursos consultar() throws JSONException {
 
         String url = Constants.URL + "getCurso.php";
+        //user=getArguments().getString("usuario");
 
         List<NameValuePair> nameValuePairs;
         nameValuePairs = new ArrayList<NameValuePair>(1);
-        nameValuePairs.add(new BasicNameValuePair("usuario", "sebastianq"));
+        nameValuePairs.add(new BasicNameValuePair("usuario", user));
 
         String json = APIHandler.POSTRESPONSE(url, nameValuePairs);
         if (json != null) {

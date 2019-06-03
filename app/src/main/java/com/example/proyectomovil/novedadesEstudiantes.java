@@ -7,11 +7,19 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -28,74 +36,60 @@ public class novedadesEstudiantes extends Fragment {
     private TextView text;
     private TextView text2;
     private TextView text3;
+    private double longitud;
+    private double lactitud;
+
+
+    private static final String mURL = Constants.URL + "getNov.php";
+    RecyclerView recyclerView;
+    NovedadAdapter novedadAdapter;
+    List<Novedad> novedadList;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v =inflater.inflate(R.layout.fragment_novedades_estudiantes, container, false);
+        View v = inflater.inflate(R.layout.fragment_novedades_estudiantes, container, false);
 
-        text2 = (TextView) v.findViewById(R.id.Lbn);
-        text = (TextView) v.findViewById(R.id.Lbn2);
-        text3 = (TextView) v.findViewById(R.id.Lbn3);
-        new Consultar(getActivity()).execute();
+
+        loadStudent();
         return v;
     }
-    //-------------------AsyncTask para consultar Novedades---------------------------------------------------------------------------------------------
-    class Consultar extends AsyncTask<String, String, String> {
-        private Activity context;
 
-        Consultar(Activity context) {
-            this.context = context;
-        }
+    private void loadStudent() {
 
-        protected String doInBackground(String... params) {
-            try {
-                final Novedades novedades = consultar();
-                if (novedades != null)
-                    context.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, mURL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray array = new JSONArray(response);
+                            for (int i = 0; i < array.length(); i++) {
+                                JSONObject novedad = array.getJSONObject(i);
+                                longitud = Double.parseDouble(novedad.getString("longitud"));
+                                lactitud = Double.parseDouble(novedad.getString("longitud"));
+                                novedadList.add(new Novedad(novedad.getString("cambioSalon"), novedad.getString("cancelacionClase"),
+                                        novedad.getString("recordatorio"), novedad.getString("salidaCampo"), longitud, lactitud));
 
-                            text.setText(novedades.getRecordatorio());
-                            text2.setText(novedades.getCambioSalon());
-                            text3.setText(novedades.getCancelacionClase());
+                            }
+
+                            novedadAdapter = new NovedadAdapter(getActivity(), novedadList);
+                            recyclerView.setAdapter(novedadAdapter);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    });
-                else
-                    context.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(context, "Pago no encontrado", Toast.LENGTH_LONG).show();
-                        }
-                    });
-            } catch (JSONException e) {
-                e.printStackTrace();
+                    }
+
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
             }
-            return null;
-        }
+        });
+
+        Volley.newRequestQueue(getContext()).add(stringRequest);
+
+
     }
-
-    private Novedades consultar() throws JSONException {
-
-        String url = Constants.URL + "getNovedades.php";
-
-        List<NameValuePair> nameValuePairs;
-        nameValuePairs = new ArrayList<NameValuePair>(1);
-        nameValuePairs.add(new BasicNameValuePair("id_novedades", "jhordanres"));
-
-        String json = APIHandler.POSTRESPONSE(url, nameValuePairs);
-        if (json != null) {
-            JSONObject object = new JSONObject(json);
-            JSONArray json_array = object.optJSONArray("novedades");
-            if (json_array.length() > 0) {
-                Novedades novedades = new Novedades(json_array.getJSONObject(0));
-                return novedades;
-            }
-            return null;
-        }
-        return null;
-    }
-
 }

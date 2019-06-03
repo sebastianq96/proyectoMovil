@@ -1,42 +1,26 @@
 package com.example.proyectomovil;
 
-
-import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.JsonArray;
 
-public class perfilActivity extends AppCompatActivity {
+import java.util.HashMap;
+import java.util.Map;
 
+public class PerfilEstudiante extends AppCompatActivity {
     private Button bEntrar;
     private Button bIngresar;
     private EditText txtusuario;
@@ -51,7 +35,7 @@ public class perfilActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_perfil);
+        setContentView(R.layout.activity_perfil_estudiante);
         txtusuario = (EditText) findViewById(R.id.usuario);
         contrasena = (EditText) findViewById(R.id.contrasena);
         bEntrar = (Button) findViewById(R.id.entrar);
@@ -59,33 +43,32 @@ public class perfilActivity extends AppCompatActivity {
 
         rq = Volley.newRequestQueue(this);
 
-        //FUNCIÓN, LUEGO DEL LOGGIN QUE ENVIARÁ
+    //FUNCIÓN, LUEGO DEL LOGGIN QUE ENVIARÁ
         bEntrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(perfilActivity.this, perfilActivity.class);
-                startActivity(intent);
-            }
-        });
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(PerfilEstudiante.this, perfilActivity.class);
+            startActivity(intent);
+        }
+    });
 
         bIngresar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                iniciarSesionProfe();
-            }
-        });
+        @Override
+        public void onClick(View v) {
+            iniciarSesionProfe();
+        }
+    });
 
 
-    }
+}
 
     private void iniciarSesionProfe() {
-        StringRequest request = new StringRequest(Request.Method.POST, Constants.URL + "sesion.php"
+        StringRequest request = new StringRequest(Request.Method.POST, Constants.URL + "sesion2.php"
                 , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (response.contains("1")) {
-
-                    Intent intent = new Intent( getApplicationContext(), MainActivity3.class);
+                    Intent intent = new Intent( getApplicationContext(), MainActivity2.class);
                     intent.putExtra("usuario", txtusuario.getText().toString());
                     startActivity(intent);
                 } else {
@@ -115,4 +98,3 @@ public class perfilActivity extends AppCompatActivity {
 
     }
 }
-

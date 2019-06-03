@@ -42,6 +42,8 @@ public class MainActivity2 extends AppCompatActivity
     private TextView tx2;
     private TextView tx3;
     private TextView tx4;
+    private TextView tx5;
+    String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +70,7 @@ public class MainActivity2 extends AppCompatActivity
         tx2=(TextView)findViewById(R.id.textView3);
         tx3=(TextView)findViewById(R.id.textView4);
         tx4=(TextView)findViewById(R.id.textView5);
+        tx5=(TextView)findViewById(R.id.user);
 
         new Consultar(this).execute();
 
@@ -95,6 +98,7 @@ public class MainActivity2 extends AppCompatActivity
 
         int id = item.getItemId();
 
+
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
@@ -113,6 +117,12 @@ public class MainActivity2 extends AppCompatActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         if (id == R.id.nav_descripcionEst) {
+            Bundle bundle=new Bundle();
+            descripcionEstudiantes de =new descripcionEstudiantes();
+
+            bundle.putString("usuario",user);
+            de.setArguments(bundle);
+
             fragmentManager.beginTransaction().replace(R.id.contenedor,new descripcionEstudiantes()).commit();
             img.setVisibility(View.INVISIBLE);
             tx1.setVisibility(View.INVISIBLE);
@@ -198,10 +208,11 @@ public class MainActivity2 extends AppCompatActivity
     private rol consultar() throws JSONException {
 
         String url = Constants.URL + "getEstudiante.php";
+        user= getIntent().getStringExtra("usuario");
 
         List<NameValuePair> nameValuePairs;
         nameValuePairs = new ArrayList<NameValuePair>(1);
-        nameValuePairs.add(new BasicNameValuePair("rol", "estudiante"));
+        nameValuePairs.add(new BasicNameValuePair("usuario", user));
 
         String json = APIHandler.POSTRESPONSE(url, nameValuePairs);
         if (json != null) {

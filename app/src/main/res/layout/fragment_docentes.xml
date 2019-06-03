@@ -39,7 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
-                    android:text="hola"
+                    android:text="Nombre"
                     android:textSize="25dp"
                     android:textStyle="bold" />
 
@@ -47,21 +47,22 @@
                     android:id="@+id/labeld2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="descripci"
+                    android:text="Programa"
                     android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/labeld3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="asdsad"
+                    android:text="Cedula"
                     android:textSize="16sp" />
+
                 <TextView
                     android:id="@+id/labeld4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
-                    android:text="descripci"
+                    android:text="usuario"
                     android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>
