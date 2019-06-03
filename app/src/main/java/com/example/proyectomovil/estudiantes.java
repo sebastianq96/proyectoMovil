@@ -7,11 +7,12 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -22,15 +23,27 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 
-@SuppressLint("InlinedApi")
+
+
 public class estudiantes extends Fragment {
 
-    private TextView text;
-    private TextView text2;
-    private TextView text3;
-    private TextView text4;
+
+    private  static final String mURL="http://192.168.0.12/proyectoMoviles/getESt.php";
+    RecyclerView recyclerView;
+    StudentAdapter studentAdapter;
+    List<Students>studentList;
+    int cedula;
+    String programa;
+    String usuario;
+    String nombre ;
+    String rol;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,69 +52,53 @@ public class estudiantes extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_estudiantes, container, false);
 
-        text2 = (TextView) v.findViewById(R.id.labeld2);
-        text = (TextView) v.findViewById(R.id.labeld);
-        text3 = (TextView) v.findViewById(R.id.labeld3);
-        text4 = (TextView) v.findViewById(R.id.labeld4);
-        new Consultar(getActivity()).execute();
+
+
+        studentList = new ArrayList<>();
+        recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+        loadStudent();
         return v;
     }
 
-    //-------------------AsyncTask para consultar cursos---------------------------------------------------------------------------------------------
-    class Consultar extends AsyncTask<String, String, String> {
-        private Activity context;
+    private void loadStudent() {
 
-        Consultar(Activity context) {
-            this.context = context;
-        }
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, mURL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray array = new JSONArray(response);
+                            for (int i = 0; i < array.length(); i++) {
+                                JSONObject student = array.getJSONObject(i);
+                                cedula = Integer.parseInt(student.getString("cedula"));
+                                studentList.add(new Students(cedula, student.getString("nombre"), student.getString("rol"),
+                                        student.getString("usuario"), student.getString("programa")));
 
-        protected String doInBackground(String... params) {
-            try {
-                final rol profesor = consultar();
-                if (profesor != null)
-                    context.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
 
-                            text.setText(profesor.getNombre());
-                            text2.setText("Programa: "+profesor.getPrograma());
-                            text3.setText("Cedula: "+profesor.getCedula());
-                            text4.setText("Usuario: "+ profesor.getUsuario());
+                                Log.d("nombre", String.valueOf(cedula));
+                            }
+
+                            studentAdapter = new StudentAdapter(getActivity(), studentList);
+                            recyclerView.setAdapter(studentAdapter);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    });
-                else
-                    context.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(context, "clase no encontrado", Toast.LENGTH_LONG).show();
-                        }
-                    });
-            } catch (JSONException e) {
-                e.printStackTrace();
+                    }
+
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
             }
-            return null;
-        }
-    }
+        });
 
-    private rol consultar() throws JSONException {
+        Volley.newRequestQueue(getContext()).add(stringRequest);
 
-        String url = Constants.URL + "getEstudiante.php";
 
-        List<NameValuePair> nameValuePairs;
-        nameValuePairs = new ArrayList<NameValuePair>(1);
-        nameValuePairs.add(new BasicNameValuePair("rol", "estudiante"));
-
-        String json = APIHandler.POSTRESPONSE(url, nameValuePairs);
-        if (json != null) {
-            JSONObject object = new JSONObject(json);
-            JSONArray json_array = object.optJSONArray("estudiante");
-            if (json_array.length() > 0) {
-                rol profesor = new rol(json_array.getJSONObject(0));
-                return profesor;
-            }
-            return null;
-        }
-        return null;
     }
 }
 
