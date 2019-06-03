@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -40,6 +41,7 @@ public class MainActivity3 extends AppCompatActivity
     private TextView tx2;
     private TextView tx3;
     private TextView tx4;
+    String usuario;
 
 
     @Override
@@ -191,10 +193,11 @@ public class MainActivity3 extends AppCompatActivity
     private rol consultar() throws JSONException {
 
         String url = Constants.URL + "getDocente.php";
-
+        usuario = getIntent().getStringExtra("usuario");
+        //Log.d("userioooo",usuario);
         List<NameValuePair> nameValuePairs;
         nameValuePairs = new ArrayList<NameValuePair>(1);
-        nameValuePairs.add(new BasicNameValuePair("rol", "profesor"));
+        nameValuePairs.add(new BasicNameValuePair("usuario", usuario));
 
         String json = APIHandler.POSTRESPONSE(url, nameValuePairs);
         if (json != null) {

@@ -35,7 +35,7 @@ import com.android.volley.toolbox.Volley;
 public class estudiantes extends Fragment {
 
 
-    private  static final String mURL="http://192.168.0.12/proyectoMoviles/getESt.php";
+    private  static final String mURL=Constants.URL +"getESt.php";
     RecyclerView recyclerView;
     StudentAdapter studentAdapter;
     List<Students>studentList;
