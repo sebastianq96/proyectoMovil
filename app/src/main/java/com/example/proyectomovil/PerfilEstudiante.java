@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PerfilEstudiante extends AppCompatActivity {
-    private Button bEntrar;
+
     private Button bIngresar;
     private EditText txtusuario;
     private EditText contrasena;
@@ -38,19 +38,11 @@ public class PerfilEstudiante extends AppCompatActivity {
         setContentView(R.layout.activity_perfil_estudiante);
         txtusuario = (EditText) findViewById(R.id.usuario);
         contrasena = (EditText) findViewById(R.id.contrasena);
-        bEntrar = (Button) findViewById(R.id.entrar);
         bIngresar = (Button) findViewById(R.id.login);
 
         rq = Volley.newRequestQueue(this);
 
     //FUNCIÓN, LUEGO DEL LOGGIN QUE ENVIARÁ
-        bEntrar.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(PerfilEstudiante.this, perfilActivity.class);
-            startActivity(intent);
-        }
-    });
 
         bIngresar.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -58,8 +50,6 @@ public class PerfilEstudiante extends AppCompatActivity {
             iniciarSesionProfe();
         }
     });
-
-
 }
 
     private void iniciarSesionProfe() {
@@ -91,10 +81,4 @@ public class PerfilEstudiante extends AppCompatActivity {
         Volley.newRequestQueue(this).add(request);
     }
 
-
-    public void goCreateAccount(View view) {
-        Intent intent = new Intent(this, CreateAccountActivity.class);
-        startActivity(intent);
-
-    }
 }
