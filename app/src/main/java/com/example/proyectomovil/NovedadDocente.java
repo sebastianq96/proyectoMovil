@@ -1,4 +1,4 @@
-package com.example.novedades;
+package com.example.proyectomovil;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -22,20 +22,24 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class nuevaNovedadDoc extends AppCompatActivity {
+public class NovedadDocente extends AppCompatActivity {
 
-    private EditText id_curso, estadoClase, cambioClase, novedad;
+    private EditText id_curso, estadoClase, cambioClase, novedad, salida;
     private Button btnInsertar;
+
+    int salidaBool;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nueva_novedad_doc);
+        setContentView(R.layout.activity_novedad_docente);
+
 
         id_curso=(EditText)findViewById(R.id.txtCurso);
         estadoClase=(EditText)findViewById(R.id.txtClase);
         cambioClase=(EditText)findViewById(R.id.txtCambioSalon);
-        novedad=(EditText)findViewById(R.id.txtNovedades);
+        novedad=(EditText)findViewById(R.id.txtNovedad);
+        salida=(EditText)findViewById(R.id.txtSalida);
         btnInsertar=(Button)findViewById(R.id.btnEnviar);
 
         btnInsertar.setOnClickListener(new View.OnClickListener(){
@@ -46,10 +50,10 @@ public class nuevaNovedadDoc extends AppCompatActivity {
                 if(!id_curso.getText().toString().trim().equalsIgnoreCase("")||
                         !estadoClase.getText().toString().trim().equalsIgnoreCase("")||
                         !cambioClase.getText().toString().trim().equalsIgnoreCase("")||
-                        !novedad.getText().toString().trim().equalsIgnoreCase(""))
-                    new nuevaNovedadDoc.Insertar(nuevaNovedadDoc.this).execute();
+                        !novedad.getText().toString().trim().equalsIgnoreCase("")||!salida.getText().toString().trim().equalsIgnoreCase(""))
+                    new Insertar(NovedadDocente.this).execute();
                 else
-                    Toast.makeText(nuevaNovedadDoc.this, "Hay información por rellenar", Toast.LENGTH_LONG).show();
+                    Toast.makeText(NovedadDocente.this, "Hay información por rellenar", Toast.LENGTH_LONG).show();
             }
 
         });
@@ -75,6 +79,7 @@ public class nuevaNovedadDoc extends AppCompatActivity {
                         estadoClase.setText("");
                         cambioClase.setText("");
                         novedad.setText("");
+                        salida.setText("");
                     }
                 });
             else
@@ -94,13 +99,21 @@ public class nuevaNovedadDoc extends AppCompatActivity {
         List<NameValuePair> nameValuePairs;
         HttpPost httppost;
         httpclient=new DefaultHttpClient();
-        httppost= new HttpPost("http://192.168.0.34/insert.php"); // Url del Servidor
+        httppost= new HttpPost(Constants.URL + "insertNovedadDocente.php"); // Url del Servidor
         //Añadimos nuestros datos
-        nameValuePairs = new ArrayList<NameValuePair>(4);
+        nameValuePairs = new ArrayList<NameValuePair>(5);
         nameValuePairs.add(new BasicNameValuePair("id_curso",id_curso.getText().toString().trim()));
-        nameValuePairs.add(new BasicNameValuePair("estadoClase",estadoClase.getText().toString().trim()));
-        nameValuePairs.add(new BasicNameValuePair("cambioClase",cambioClase.getText().toString().trim()));
-        nameValuePairs.add(new BasicNameValuePair("novedad",novedad.getText().toString().trim()));
+        nameValuePairs.add(new BasicNameValuePair("cancelacionClase",estadoClase.getText().toString().trim()));
+        nameValuePairs.add(new BasicNameValuePair("cambioSalon",cambioClase.getText().toString().trim()));
+        nameValuePairs.add(new BasicNameValuePair("recordatorio",novedad.getText().toString().trim()));
+
+        if (salida.getText().toString().equals("si")){
+            salidaBool=1;
+        } else {
+            salidaBool=0;
+        }
+
+        nameValuePairs.add(new BasicNameValuePair("salidaCampo",String.valueOf(salidaBool)));
         try {
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             httpclient.execute(httppost);

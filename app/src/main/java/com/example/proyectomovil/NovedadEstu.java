@@ -101,10 +101,8 @@ public class NovedadEstu extends AppCompatActivity {
         httpclient=new DefaultHttpClient();
         httppost= new HttpPost(Constants.URL + "insertNovedadEstu.php"); // Url del Servidor
         //Añadimos nuestros datos
-        nameValuePairs = new ArrayList<NameValuePair>(5);
+        nameValuePairs = new ArrayList<NameValuePair>(3);
         nameValuePairs.add(new BasicNameValuePair("id_curso",id_curso.getText().toString().trim()));
-        nameValuePairs.add(new BasicNameValuePair("cancelacionClase",estadoClase.getText().toString().trim()));
-        nameValuePairs.add(new BasicNameValuePair("cambioSalon",cambioClase.getText().toString().trim()));
         nameValuePairs.add(new BasicNameValuePair("recordatorio",novedad.getText().toString().trim()));
 
         if (salida.getText().toString().equals("si")){
