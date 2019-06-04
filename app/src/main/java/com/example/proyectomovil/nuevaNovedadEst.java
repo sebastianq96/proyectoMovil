@@ -22,18 +22,16 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NovedadDocente extends AppCompatActivity {
+public class nuevaNovedadEst extends AppCompatActivity {
 
     private EditText id_curso, estadoClase, cambioClase, novedad, salida;
     private Button btnInsertar;
-
     int salidaBool;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_novedad_docente);
-
+        setContentView(R.layout.activity_nueva_novedad_est);
 
         id_curso=(EditText)findViewById(R.id.txtCurso);
         estadoClase=(EditText)findViewById(R.id.txtClase);
@@ -48,12 +46,13 @@ public class NovedadDocente extends AppCompatActivity {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 if(!id_curso.getText().toString().trim().equalsIgnoreCase("")||
-                        !estadoClase.getText().toString().trim().equalsIgnoreCase("")||
-                        !cambioClase.getText().toString().trim().equalsIgnoreCase("")||
-                        !novedad.getText().toString().trim().equalsIgnoreCase("")||!salida.getText().toString().trim().equalsIgnoreCase(""))
-                    new Insertar(NovedadDocente.this).execute();
+                        //!estadoClase.getText().toString().trim().equalsIgnoreCase("")||
+                        //!cambioClase.getText().toString().trim().equalsIgnoreCase("")||
+                        !novedad.getText().toString().trim().equalsIgnoreCase("")||
+                        !salida.getText().toString().trim().equalsIgnoreCase(""))
+                    new Insertar(nuevaNovedadEst.this).execute();
                 else
-                    Toast.makeText(NovedadDocente.this, "Hay información por rellenar", Toast.LENGTH_LONG).show();
+                    Toast.makeText(nuevaNovedadEst.this, "Hay información por rellenar", Toast.LENGTH_LONG).show();
             }
 
         });
@@ -76,8 +75,8 @@ public class NovedadDocente extends AppCompatActivity {
                         // TODO Auto-generated method stub
                         Toast.makeText(context, "Novedad insertada con éxito", Toast.LENGTH_LONG).show();
                         id_curso.setText("");
-                        estadoClase.setText("");
-                        cambioClase.setText("");
+                        //estadoClase.setText("");
+                        //cambioClase.setText("");
                         novedad.setText("");
                         salida.setText("");
                     }
@@ -99,20 +98,16 @@ public class NovedadDocente extends AppCompatActivity {
         List<NameValuePair> nameValuePairs;
         HttpPost httppost;
         httpclient=new DefaultHttpClient();
-        httppost= new HttpPost(Constants.URL + "insertNovedadDocente.php"); // Url del Servidor
+        httppost= new HttpPost(Constants.URL + "insertNovedadEstu.php"); // Url del Servidor
         //Añadimos nuestros datos
-        nameValuePairs = new ArrayList<NameValuePair>(5);
+        nameValuePairs = new ArrayList<NameValuePair>(3);
         nameValuePairs.add(new BasicNameValuePair("id_curso",id_curso.getText().toString().trim()));
-        nameValuePairs.add(new BasicNameValuePair("cancelacionClase",estadoClase.getText().toString().trim()));
-        nameValuePairs.add(new BasicNameValuePair("cambioSalon",cambioClase.getText().toString().trim()));
         nameValuePairs.add(new BasicNameValuePair("recordatorio",novedad.getText().toString().trim()));
-
         if (salida.getText().toString().equals("si")){
             salidaBool=1;
         } else {
             salidaBool=0;
         }
-
         nameValuePairs.add(new BasicNameValuePair("salidaCampo",String.valueOf(salidaBool)));
         try {
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));

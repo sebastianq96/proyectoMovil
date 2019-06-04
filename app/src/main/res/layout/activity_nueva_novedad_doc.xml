@@ -53,14 +53,28 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtNovedades"
+        android:id="@+id/txtNovedad"
         android:layout_margin="5dp"/>
 
-    <Button
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Enviar"
-        android:id="@+id/btnEnviar"/>
+        android:layout_marginTop="15dp"
+        android:text="¿Asistirá a la salida de campo?" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtSalida"
+        android:layout_margin="5dp"/>
+
+
+    <Button
+        android:id="@+id/btnEnviar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Enviar" />
 
 </LinearLayout>
