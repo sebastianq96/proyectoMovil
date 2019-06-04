@@ -38,7 +38,7 @@ public class Novedad {
         return lactitud;
     }
 
-
+/*
     public void setCambioSalon(String cambioSalon) {
         this.cambioSalon = cambioSalon;
     }
@@ -61,6 +61,6 @@ public class Novedad {
 
     public void setLactitud(double lactitud) {
         this.lactitud = lactitud;
-    }
+    }*/
 }
 
