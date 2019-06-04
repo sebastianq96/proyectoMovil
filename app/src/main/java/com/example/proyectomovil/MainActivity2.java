@@ -139,7 +139,8 @@ public class MainActivity2 extends AppCompatActivity
             tx4.setVisibility(View.INVISIBLE);
 
         } else if (id == R.id.nav_novedadesEst) {
-            fragmentManager.beginTransaction().replace(R.id.contenedor,new novedadesEstudiantes()).commit();
+            Intent intent3 = new Intent(MainActivity2.this, NovedadEstu.class);
+            startActivity(intent3);
             img.setVisibility(View.INVISIBLE);
             tx1.setVisibility(View.INVISIBLE);
             tx2.setVisibility(View.INVISIBLE);
