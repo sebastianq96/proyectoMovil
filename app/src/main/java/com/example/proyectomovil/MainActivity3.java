@@ -134,7 +134,7 @@ public class MainActivity3 extends AppCompatActivity
             tx3.setVisibility(View.INVISIBLE);
             tx4.setVisibility(View.INVISIBLE);
         } else if (id == R.id.nav_novedadesDoc) {
-            Intent intent3 = new Intent(MainActivity3.this, nuevaNovedadDoc.class);
+            Intent intent3 = new Intent(MainActivity3.this, agregarNovedadDoc.class);
             startActivity(intent3);
             img.setVisibility(View.INVISIBLE);
             tx1.setVisibility(View.INVISIBLE);

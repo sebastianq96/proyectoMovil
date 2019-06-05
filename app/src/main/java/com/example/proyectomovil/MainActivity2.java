@@ -147,6 +147,14 @@ public class MainActivity2 extends AppCompatActivity
             tx3.setVisibility(View.INVISIBLE);
             tx4.setVisibility(View.INVISIBLE);
 
+        } else if (id == R.id.nav_novedadesGen) {
+            fragmentManager.beginTransaction().replace(R.id.contenedor,new novedadesGenerales()).commit();
+            img.setVisibility(View.INVISIBLE);
+            tx1.setVisibility(View.INVISIBLE);
+            tx2.setVisibility(View.INVISIBLE);
+            tx3.setVisibility(View.INVISIBLE);
+            tx4.setVisibility(View.INVISIBLE);
+
         } else if (id == R.id.nav_salidasDeCampoEst) {
             Intent intent3 = new Intent(MainActivity2.this, MainActivity4.class);
             startActivity(intent3);

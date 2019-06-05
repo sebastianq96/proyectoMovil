@@ -18,6 +18,10 @@
             android:icon="@drawable/novedades"
             android:title="Novedades" />
         <item
+            android:id="@+id/nav_novedadesGen"
+            android:icon="@drawable/novedades"
+            android:title="Novedades Generales" />
+        <item
             android:id="@+id/nav_salidasDeCampoEst"
             android:icon="@drawable/salidascampo"
             android:title="Salidas de Campo" />

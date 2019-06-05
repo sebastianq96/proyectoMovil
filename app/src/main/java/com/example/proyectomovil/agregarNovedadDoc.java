@@ -22,7 +22,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class nuevaNovedadDoc extends AppCompatActivity{
+public class agregarNovedadDoc extends AppCompatActivity {
 
     private EditText id_curso, estadoClase, cambioClase, novedad, salida;
     private Button btnInsertar;
@@ -31,7 +31,7 @@ public class nuevaNovedadDoc extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nueva_novedad_doc);
+        setContentView(R.layout.activity_agregar_novedad_doc);
 
         id_curso=(EditText)findViewById(R.id.txtCurso);
         estadoClase=(EditText)findViewById(R.id.txtClase);
@@ -49,9 +49,9 @@ public class nuevaNovedadDoc extends AppCompatActivity{
                         !estadoClase.getText().toString().trim().equalsIgnoreCase("")||
                         !cambioClase.getText().toString().trim().equalsIgnoreCase("")||
                         !novedad.getText().toString().trim().equalsIgnoreCase("")||!salida.getText().toString().trim().equalsIgnoreCase(""))
-                    new Insertar(nuevaNovedadDoc.this).execute();
+                    new Insertar(agregarNovedadDoc.this).execute();
                 else
-                    Toast.makeText(nuevaNovedadDoc.this, "Hay información por rellenar", Toast.LENGTH_LONG).show();
+                    Toast.makeText(agregarNovedadDoc.this, "Hay información por rellenar", Toast.LENGTH_LONG).show();
             }
 
         });

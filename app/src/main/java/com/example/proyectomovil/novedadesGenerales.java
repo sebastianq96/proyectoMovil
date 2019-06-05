@@ -2,6 +2,7 @@ package com.example.proyectomovil;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -28,7 +30,7 @@ public class novedadesGenerales extends Fragment {
     NovedadAdapter novedadAdapter;
     List<Novedad> novedadList;
     String cambioSalon, cancelacionClase, recordatorio, salidaCampo;
-    int longitud, lactitud;
+    double longitud, lactitud;
 
 
     @Override
@@ -37,27 +39,34 @@ public class novedadesGenerales extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_novedades_generales, container, false);
 
+        novedadList = new ArrayList<>();
+        recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        loadNovedad();
         return v;
     }
 
-    private void loadStudent() {
-
+    private void loadNovedad() {
+        Log.d("entro", "entro");
         StringRequest stringRequest = new StringRequest(Request.Method.GET, mURL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
                         try {
                             JSONArray array = new JSONArray(response);
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject novedad = array.getJSONObject(i);
                                 //cedula = Integer.parseInt(novedad.getString("longitud"));
-                                longitud = Integer.parseInt(novedad.getString("longitud"));
-                                lactitud = Integer.parseInt(novedad.getString("lactitud"));
+                                longitud = Double.parseDouble(novedad.getString("longitud"));
+                                lactitud =  Double.parseDouble(novedad.getString("lactitud"));
                                 novedadList.add(new Novedad(novedad.getString("cambioSalon"), novedad.getString("cancelacionClase"),
                                         novedad.getString("recordatorio"), novedad.getString("salidaCampo"), longitud, lactitud));
 
 
-                                Log.d("id_curso", String.valueOf(longitud));
+
                             }
 
                             novedadAdapter = new NovedadAdapter(getActivity(), novedadList);
